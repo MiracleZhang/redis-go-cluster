@@ -36,7 +36,7 @@ type Options struct {
 
     KeepAlive	    int		    // Maximum keep alive connecion in each node
     AliveTime	    time.Duration   // Keep alive timeout
-    Debug           bool         // todo������debug ģʽ�������������������������ʲ�������Ҫת����������ַ
+    Debug           bool         // todo：增加debug 模式，用于内网服务器，访问不到，需要转换成外网地址
 }
 
 // Cluster is a redis client that manage connections to redis nodes, 
@@ -366,8 +366,8 @@ func (cluster *Cluster) update(node *redisNode) error {
 	    return errFormat
 	}
 
-	// todo: for test by zhangjianping
-	// todo: ��Ϊ��redis ��Ⱥ�з��صĶ�������������ַ�ڵ㣬�����ڲ���ʱ�������ϣ���Ҫ��������ַ����������ַ������ʽ����������Ҫ�ر�
+	// todo: for test by LanPZzzz
+	// todo: 因为在redis 集群中返回的都是内网地址节点，但是在测试时不能连上，需要把内网地址给出外网地址，在正式服务器中需要关闭
 	if cluster.debug {
 		ip = cluster.internalToOut[ip]
 	}
