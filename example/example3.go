@@ -11,12 +11,15 @@ import (
 func main() {
     cluster, err := redis.NewCluster(
 	&redis.Options{
-	    StartNodes: []string{"127.0.0.1:7000", "127.0.0.1:7001", "127.0.0.1:7002"},
+	    StartNodes: []string{"159.138.28.39:7001", "159.138.28.39:7002", "159.138.25.20:7003", "159.138.25.20:7004", "159.138.27.102:7005", "159.138.27.102:7006"},
+		InternalToOutStartNodes:[]string{"10.250.0.174:159.138.28.39","10.250.0.109:159.138.25.20","10.250.0.78:159.138.27.102"},
+		//StartNodes: []string{"159.138.2.170:6379", "159.138.28.39:7001"},
 	    ConnTimeout: 50 * time.Millisecond,
 	    ReadTimeout: 50 * time.Millisecond,
 	    WriteTimeout: 50 * time.Millisecond,
 	    KeepAlive: 16,
 	    AliveTime: 60 * time.Second,
+	    Debug:true,
 	})
 
     if err != nil {

@@ -27,6 +27,7 @@ import (
 // Options is used to initialize a new redis cluster.
 type Options struct {
     StartNodes	    []string	    // Startup nodes
+    InternalToOutStartNodes []string  // internal startup nodes  "in:out" => "159.138.28.39:10.250.0.174"
 
     ConnTimeout	    time.Duration   // Connection timeout
     ReadTimeout	    time.Duration   // Read timeout
@@ -34,6 +35,7 @@ type Options struct {
 
     KeepAlive	    int		    // Maximum keep alive connecion in each node
     AliveTime	    time.Duration   // Keep alive timeout
+    Debug           bool         // todo：增加debug 模式，用于苏州内网服务器，访问不到，需要转换成外网地址
 }
 
 // Cluster is a redis client that manage connections to redis nodes, 
@@ -55,7 +57,10 @@ type Cluster struct {
 
     rwLock	    sync.RWMutex
 
+    internalToOut map[string]string
+
     closed	    bool
+	debug       bool
 }
 
 type updateMesg struct {
@@ -73,7 +78,16 @@ func NewCluster(options *Options) (*Cluster, error) {
 	keepAlive: options.KeepAlive,
 	aliveTime: options.AliveTime,
 	updateList: make(chan updateMesg),
+	debug:options.Debug,
+	internalToOut:make(map[string]string),
     }
+
+    if cluster.debug {
+		for _, v := range options.InternalToOutStartNodes {
+			s := strings.Split(v, ":")
+			cluster.internalToOut[s[0]] = s[1];
+		}
+	}
 
     for i := range options.StartNodes {
 	node := &redisNode{
@@ -350,6 +364,13 @@ func (cluster *Cluster) update(node *redisNode) error {
 	if err != nil {
 	    return errFormat
 	}
+
+	// todo: for test by zhangjianping
+	// todo: 因为在redis 集群中返回的都是苏州内网地址节点，但是在测试时不能连上，需要把内网地址给出外网地址，在正式服务器中需要关闭
+	if cluster.debug {
+		ip = cluster.internalToOut[ip]
+	}
+
 	addr := fmt.Sprintf("%s:%d", ip, port)
 
 	slot, ok := slots[addr]
