@@ -21,11 +21,11 @@ import (
 	"container/list"
 	"errors"
 	"fmt"
+	"log"
 	"net"
 	"strconv"
 	"sync"
 	"time"
-	"log"
 )
 
 type redisConn struct {
