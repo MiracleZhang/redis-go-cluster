@@ -1,3 +1,4 @@
+// Copyright 2019 LanPZzzz
 // Copyright 2015 Joel Wu
 //
 // Licensed under the Apache License, Version 2.0 (the "License"): you may
@@ -35,7 +36,7 @@ type Options struct {
 
     KeepAlive	    int		    // Maximum keep alive connecion in each node
     AliveTime	    time.Duration   // Keep alive timeout
-    Debug           bool         // todo：增加debug 模式，用于苏州内网服务器，访问不到，需要转换成外网地址
+    Debug           bool         // todo锟斤拷锟斤拷锟斤拷debug 模式锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟绞诧拷锟斤拷锟斤拷锟斤拷要转锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷址
 }
 
 // Cluster is a redis client that manage connections to redis nodes, 
@@ -366,7 +367,7 @@ func (cluster *Cluster) update(node *redisNode) error {
 	}
 
 	// todo: for test by zhangjianping
-	// todo: 因为在redis 集群中返回的都是苏州内网地址节点，但是在测试时不能连上，需要把内网地址给出外网地址，在正式服务器中需要关闭
+	// todo: 锟斤拷为锟斤拷redis 锟斤拷群锟叫凤拷锟截的讹拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷址锟节点，锟斤拷锟斤拷锟节诧拷锟斤拷时锟斤拷锟斤拷锟斤拷锟较ｏ拷锟斤拷要锟斤拷锟斤拷锟斤拷锟斤拷址锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷址锟斤拷锟斤拷锟斤拷式锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷要锟截憋拷
 	if cluster.debug {
 		ip = cluster.internalToOut[ip]
 	}

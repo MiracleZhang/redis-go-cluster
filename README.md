@@ -22,14 +22,14 @@ to its high efficiency and low lantency.
 ## Installation
 Install redis-go-cluster with go tool:
 ```
-    go get github.com/chasex/redis-go-cluster
+    go get github.com/MiracleZhang/redis-go-cluster
 ```
     
 ## Usage
 To use redis cluster, you need import the package and create a new cluster client
 with an options:
 ```go
-import "github.com/chasex/redis-go-cluster"
+import "github.com/MiracleZhang/redis-go-cluster"
 
 cluster, err := redis.NewCluster(
     &redis.Options{
@@ -112,10 +112,6 @@ for i := 0; i < 4; i++ {
 
 countries, err := Strings(reply[0], nil)
 ```
-
-## Contact
-Bug reports and feature requests are welcome.
-If you have any question, please email me wuxibin2012@gmail.com.
 
 ## License
 redis-go-cluster is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).

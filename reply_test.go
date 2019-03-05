@@ -1,3 +1,4 @@
+// Copyright 2019 LanPZzzz
 // Copyright 2015 Joel Wu
 //
 // Licensed under the Apache License, Version 2.0 (the "License"): you may
